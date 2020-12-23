@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- basic dimensions -->
+    <dimen name="small">8dp</dimen>
+    <dimen name="medium">16dp</dimen>
+
+    <!-- text sizes -->
+    <dimen name="normal_text_size">15sp</dimen>
+
+    <dimen name="venue_image_size">60dp</dimen>
+
+
+    <dimen name="default_card_corner_radius">4dp</dimen>
+    <dimen name="default_card_elevation">1dp</dimen>
+    <dimen name="detail_header_height">200dp</dimen>
+</resources>

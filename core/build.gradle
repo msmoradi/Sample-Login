@@ -3,11 +3,22 @@ plugins {
     id 'kotlin'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testKotlinxCoroutines"
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$testJunitVersion"
+    testImplementation "androidx.arch.core:core-testing:$testArchCoreVersion"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:$testCoreVersion"
+    testImplementation "androidx.test.ext:junit:$testExtJUnitVersion"
+
+    // MockK
+    testImplementation "io.mockk:mockk:$testMockKVersion"}
