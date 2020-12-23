@@ -1,0 +1,29 @@
+*.iml
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.gradle/
+.idea/
+app/build/
+app/libs/
+gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew.bat
+
+# Android Studio
+/*/build/
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.ipr
+*~
+*.swp
+
+# Generated files
+bin/
+gen/
+out/
+release/
