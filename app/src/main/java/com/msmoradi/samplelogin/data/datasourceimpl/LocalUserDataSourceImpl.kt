@@ -1,7 +1,7 @@
 package com.msmoradi.samplelogin.data.datasourceimpl
 
-import com.msmoradi.samplelogin.dataSource.LocalUserDataSource
 import com.msmoradi.samplelogin.data.UserDao
+import com.msmoradi.samplelogin.dataSource.LocalUserDataSource
 import com.msmoradi.samplelogin.model.Result
 import com.msmoradi.samplelogin.model.User
 import com.msmoradi.samplelogin.models.UserDto
@@ -47,12 +47,14 @@ fun User.toUserDto() = UserDto(
     id = id ?: 0,
     fullName = fullName,
     password = password,
-    username = username
+    username = username,
+    email = email
 )
 
 fun UserDto.toUser() = User(
     id = id,
     fullName = fullName,
     password = password,
-    username = username
+    username = username,
+    email = email
 )
