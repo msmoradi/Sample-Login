@@ -11,4 +11,6 @@ class UserUseCase(
 
     suspend fun removeUser(user: User) = userRepository.delete(user)
 
+    suspend fun update(user: User) = userRepository.update(user)
+
 }
