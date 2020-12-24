@@ -9,5 +9,6 @@ data class UserDto(
     val id: Long = 0,
     val fullName: String,
     val username: String,
+    val email: String,
     val password: String
 )
