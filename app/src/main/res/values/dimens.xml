@@ -6,6 +6,7 @@
 
     <!-- text sizes -->
     <dimen name="normal_text_size">15sp</dimen>
+    <dimen name="title_text_size">24sp</dimen>
 
     <dimen name="venue_image_size">60dp</dimen>
 
