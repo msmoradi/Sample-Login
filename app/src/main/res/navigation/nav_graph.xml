@@ -25,13 +25,19 @@
         android:id="@+id/profileFragment"
         android:name="com.msmoradi.samplelogin.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <argument
+            android:name="user"
+            app:argType="com.msmoradi.samplelogin.model.User" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.msmoradi.samplelogin.ui.signup.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -41,6 +47,10 @@
         android:id="@+id/userListFragment"
         android:name="com.msmoradi.samplelogin.ui.userList.UserListFragment"
         android:label="fragment_user_list"
-        tools:layout="@layout/fragment_user_list" />
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/action_userListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>

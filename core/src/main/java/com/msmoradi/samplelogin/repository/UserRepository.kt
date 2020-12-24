@@ -20,7 +20,7 @@ class UserRepository(
         userDataSource.delete(user)
     }
 
-    suspend fun getUsers(): Flow<List<User>> {
+    fun getUsers(): Flow<List<User>> {
         return userDataSource.readAll()
     }
 
