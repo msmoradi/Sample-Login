@@ -55,7 +55,10 @@ class UserListFragment : Fragment() {
 
     private fun navigateToProfile(user: User) {
         findNavController().navigate(
-            UserListFragmentDirections.actionUserListFragmentToProfileFragment(user)
+            UserListFragmentDirections.actionUserListFragmentToProfileFragment(
+                user = user,
+                editable = false
+            )
         )
 
     }
