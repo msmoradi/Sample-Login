@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.msmoradi.samplelogin.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +30,23 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.signUpButton.setOnClickListener {
+            signUpViewModel.signUp(
+                binding.fullNameTextField.editText?.text.toString(),
+                binding.userNameTextField.editText?.text.toString(),
+                binding.passwordTextField.editText?.text.toString(),
+                binding.confirmPasswordTextField.editText?.text.toString()
+            )
+        }
 
+        signUpViewModel.loginNavigationObservable.observe(viewLifecycleOwner) {
+            navigateToLogin()
+        }
+    }
+
+    private fun navigateToLogin() {
+        findNavController().navigate(
+            SignUpFragmentDirections.actionSignUpFragmentToLoginFragment()
+        )
     }
 }

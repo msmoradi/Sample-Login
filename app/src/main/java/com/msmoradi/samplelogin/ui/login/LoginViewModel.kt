@@ -3,12 +3,19 @@ package com.msmoradi.samplelogin.ui.login
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.msmoradi.samplelogin.model.Result
 import com.msmoradi.samplelogin.model.User
 import com.msmoradi.samplelogin.model.UserType
 import com.msmoradi.samplelogin.usecase.LoginUseCase
 import com.msmoradi.samplelogin.utils.SingleLiveData
 import com.msmoradi.samplelogin.utils.Validator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
     private val loginUseCase: LoginUseCase
@@ -29,19 +36,25 @@ class LoginViewModel @ViewModelInject constructor(
     private val _passwordErrorObservable = SingleLiveData<String>()
     val passwordErrorObservable: LiveData<String> = _snackBarObservable
 
-    fun loginClicked(username: String, password: String) {
-        if (validation(username, password)) {
-            val result = loginUseCase.login(username, password)
-            if (result is Result.Success) {
-                when(result.data.type){
-                    UserType.ADMIN -> _userListNavigationObservable.call()
-                    UserType.REGULAR -> _profileNavigationObservable.value = result.data.user
-                }
-            } else {
-                _snackBarObservable.value = "Error Login"
+    fun loginClicked(username: String, password: String) =
+        viewModelScope.launch {
+            if (validation(username, password)) {
+                loginUseCase.login(username, password)
+                    .flowOn(Dispatchers.Main)
+                    .collect { result ->
+                        if (result is Result.Success) {
+                            when (result.data.type) {
+                                UserType.ADMIN -> _userListNavigationObservable.call()
+                                UserType.REGULAR -> _profileNavigationObservable.value =
+                                    result.data.user
+                            }
+                        } else {
+                            _snackBarObservable.value = "Error Login"
+                        }
+                    }
+
             }
         }
-    }
 
     private fun validation(username: String, password: String): Boolean {
         var isValid = true

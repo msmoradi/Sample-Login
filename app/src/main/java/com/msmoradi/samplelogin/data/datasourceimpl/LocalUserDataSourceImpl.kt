@@ -1,38 +1,44 @@
 package com.msmoradi.samplelogin.data.datasourceimpl
 
-import com.msmoradi.samplelogin.DataSource.LocalUserDataSource
+import com.msmoradi.samplelogin.dataSource.LocalUserDataSource
 import com.msmoradi.samplelogin.data.UserDao
 import com.msmoradi.samplelogin.model.Result
 import com.msmoradi.samplelogin.model.User
 import com.msmoradi.samplelogin.models.UserDto
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocalUserDataSourceImpl @Inject constructor(
     private val userDao: UserDao
 ) : LocalUserDataSource {
 
-    override fun insert(user: User) {
+    override suspend fun insert(user: User) {
         userDao.insert(user.toUserDto())
     }
 
-    override fun update(user: User) {
+    override suspend fun update(user: User) {
         userDao.update(user.toUserDto())
     }
 
-    override fun delete(user: User) {
+    override suspend fun delete(user: User) {
         userDao.delete(user.toUserDto())
     }
 
-    override fun readAll(): List<User> {
-        return userDao.getUsers().map { it.toUser() }
+    override fun readAll(): Flow<List<User>> {
+        return userDao.getUsers().map {
+            it.map { userDto -> userDto.toUser() }
+        }
     }
 
-    override fun loginQuery(username: String, password: String): Result<User> {
-        val user = userDao.loginQuery(username, password)
-        return if (user != null)
-            Result.Success(user)
-        else
-            Result.Error(Exception())
+    override fun loginQuery(username: String, password: String): Flow<Result<User>> {
+        return userDao.loginQuery(username, password)
+            .map {
+                if (it != null)
+                    Result.Success(it)
+                else
+                    Result.Error(Exception())
+            }
     }
 
 }
