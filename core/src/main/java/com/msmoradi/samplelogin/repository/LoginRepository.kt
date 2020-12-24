@@ -14,7 +14,7 @@ class LoginRepository(
     fun login(username: String, password: String): Flow<Result<LoginResponse>> {
         return if (username == "admin" && password == "admin") {
             flow {
-                Result.Success(LoginResponse(type = UserType.ADMIN))
+                emit(Result.Success(LoginResponse(type = UserType.ADMIN)))
             }
         } else {
             localUserDataSource

@@ -40,7 +40,6 @@ class LoginViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             if (validation(username, password)) {
                 loginUseCase.login(username, password)
-                    .flowOn(Dispatchers.Main)
                     .collect { result ->
                         if (result is Result.Success) {
                             when (result.data.type) {

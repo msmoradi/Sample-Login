@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
 
     private fun navigateToProfile(user: User) {
         findNavController().navigate(
-            LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+            LoginFragmentDirections.actionLoginFragmentToProfileFragment(user)
         )
     }
 
