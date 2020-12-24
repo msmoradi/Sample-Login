@@ -5,6 +5,7 @@ import com.msmoradi.samplelogin.repository.LoginRepository
 import com.msmoradi.samplelogin.repository.UserRepository
 import com.msmoradi.samplelogin.usecase.LoginUseCase
 import com.msmoradi.samplelogin.usecase.SignUpUseCase
+import com.msmoradi.samplelogin.usecase.UserUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,5 +41,12 @@ object UseCaseModule {
         userRepository: UserRepository
     ): SignUpUseCase {
         return SignUpUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideUserUseCase(
+        userRepository: UserRepository
+    ): UserUseCase {
+        return UserUseCase(userRepository)
     }
 }
