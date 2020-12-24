@@ -6,53 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment">
 
-    <TextView
-        android:id="@+id/userNameLabelTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/medium"
-        android:layout_marginTop="@dimen/medium"
-        android:text="@string/label_username"
-        android:textColor="@color/design_default_color_primary"
-        android:textSize="@dimen/title_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userNameEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/medium"
-        android:layout_marginTop="@dimen/small"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameLabelTextView" />
-
-
-    <TextView
-        android:id="@+id/passwordLabelTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium"
         android:layout_marginTop="@dimen/medium"
-        android:text="@string/label_password"
-        android:textColor="@color/design_default_color_primary"
-        android:textSize="@dimen/title_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameEditText" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_username" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium"
-        android:layout_marginTop="@dimen/small"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordLabelTextView" />
+        android:layout_marginTop="@dimen/medium"
+        app:layout_constraintTop_toBottomOf="@id/userNameEditText"
+        app:passwordToggleEnabled="true">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButton"
